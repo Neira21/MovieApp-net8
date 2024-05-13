@@ -1,0 +1,90 @@
+@* <link rel="stylesheet" href="~/css/EstilosCatalogo.css"> *@
+
+@model List<Pelicula>
+
+<h2 class="text-center">Lista de Películas</h2>
+
+
+<style>
+    a {
+    color: #ffffff;
+    text-decoration: none;
+}
+    a:hover 
+{
+     color:#ffffff; 
+     text-decoration:none; 
+     cursor:pointer;  
+}
+
+
+@* img:hover{
+    width: 220px;
+    height: 290px;
+} *@
+
+img{
+    box-shadow: 5px 5px 10px
+    rgba(0, 0, 0, 0.40);
+}
+
+
+</style>
+
+
+<form method="POST">
+    <label >Filtrar por :</label>
+    <select name="idfiltro">
+        <option value="titulo">Título</option>
+        <option value="director">director</option>
+        <option value="genero">Género</option>``
+    </select>
+    <input type="text" name="filtro" required>
+    <button class="btn btn-info">Filtrar</button>
+</form>
+
+<div class="table-responsive">
+    <table class="table">
+        @for(var i=0;i<(Model.Count); i+=2)
+        {
+            <tr>
+                @for(var j=0; j<2; j++){
+                    @if(i+j<Model.Count){
+                        <td scope="col">
+                            <div class="portafolio-container"> 
+                                <a asp-action="VistaPelicula" asp-route-id="@Model[i+j].ID">     
+                                    <img class="portafolio-img" width="180px" height="250px" src="@Html.DisplayFor(modelItem => Model[i+j].Imagen)" >
+                                </a>
+                                <p>Click para ver detalles</p>
+                            </div>
+                            <b>Titulo</b>
+                            <br>
+                            @Html.DisplayFor(modelItem => Model[i+j].Titulo)
+                            <br>
+                            <b>Género</b>
+                            <br>
+                            @Html.DisplayFor(modelItem => Model[i+j].Genero)
+                            <br>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="text-center">
+                                    <button class="btn btn-primary" >
+                                        <a asp-action="EditarPelicula" asp-route-id="@Model[i+j].ID">Editar</a> 
+                                    </button>
+                                </div>
+                                
+                            }
+                        </td>
+                    }                
+                }
+            </tr>    
+        }
+    </table>
+</div>
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <button type="button" class="btn btn-success"><a asp-action="AgregarPelicula"> Registrar Nueva Película</a></button>
+}

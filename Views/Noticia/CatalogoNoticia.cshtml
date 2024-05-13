@@ -1,0 +1,54 @@
+@model IEnumerable<MovieAppWeb.Models.Noticia>
+
+
+<h2>¡Noticias de usuarios!</h2>
+
+
+<table class="table table-hover table-responsive">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Imagen)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Genero)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.contenido)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">
+                    <img src="@Html.DisplayFor(modelItem => item.Imagen)" width="100px">
+                    <a asp-action="EditarNoticia" asp-route-id="@item.ID">Editar</a> |
+                    <a asp-action="BorrarNoticia" asp-route-id="@item.ID">Borrar</a>
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.contenido)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

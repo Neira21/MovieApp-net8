@@ -1,0 +1,67 @@
+@model List<Reseña>
+<style>
+    .fondo {
+        background: white;
+        border-radius: 20px;
+        opacity: 0.8;
+        backdrop-filter: blur(8px);
+    }
+
+    .checked {
+        color: orange;
+    }
+</style>
+<div class="fondo">
+    <div class="text-center">
+        <h1>@ViewBag.peli</h1>
+        <h3>Reseñas</h3>
+    </div>
+    @if (true)
+    {
+        int comentarionro = 1;
+        @foreach (var peli in Model)
+        {
+            <div class="container">
+                <div class="row" style="background-color: teal;">
+                    <div class="col-8">
+                        Comentario #@comentarionro
+                        <small style="margin-left: 15px;">
+                            @peli.Fecha.ToString()
+                        </small>
+                    </div>
+                    <div class="col-4 text-right">
+                        <label>
+                            @for (int i = 0; i < (int)peli.Estrellas; i++)
+                            {
+                                <span class="fa fa-star checked"></span>
+                            }
+                            @for (int i = 0; i < 5 - (int)peli.Estrellas; i++)
+                            {
+                                <span class="fa fa-star"></span>
+                            }
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" style="padding-left: 10%; padding-right: 10%; padding-top: 0.5rem; text-align: justify; text-justify: auto;">
+                        <i>
+                            "@peli.Comentario"
+                        </i>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                    </div>
+                    <div class="col-4 text-right mb-3">
+                        <small>
+                            <b>
+                                ~@peli.Usuario.Username~
+                            </b>
+                        </small>
+                    </div>
+                </div>
+            </div>
+            comentarionro++;
+        }
+    }
+</div>

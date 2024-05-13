@@ -1,0 +1,33 @@
+@model MovieAppWeb.Models.Usuario;
+@{
+    ViewBag.title = "Log In";
+}
+<div class="text-center" style="margin-top: 20px; margin-bottom: 20px;">
+    <img src="/imagenes/login.png" width="50%" height="auto" alt="login">
+</div>
+
+<div class="container">
+    <h1 class="text-center">@ViewBag.title</h1>
+    <form method="POST">
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <label>Usuario:</label>
+            <input class="form-control" required id="username" name="username" placeholder="Usuario">
+        </div>
+        <div class="form-group">
+            <label>Contraseña:</label>
+            <input class="form-control" required type="password" id="pwd" name="pwd" placeholder="Contraseña">
+        </div>
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary" value="    Iniciar Sesion    ">
+        </div>
+    </form> <br>
+    <div class="text-center">
+        <small>No tienes tu cuenta aun? Registrate <a asp-controller="Usuario" asp-action="Registro">aqui</a></small>
+    </div><br>
+    <div class="row text-center">
+        <div class="col-4"><a href="#"><img src="/imagenes/facebook.png" alt="facebook" height="30px" width="30px"></a></div>
+        <div class="col-4"><a href="#"><img src="/imagenes/instagram.png" alt="instagram" height="30px" width="30px"></a></div>
+        <div class="col-4"><a href="#"><img src="/imagenes/google.png" alt="google" height="30px" width="30px"></a></div>
+    </div>
+</div>

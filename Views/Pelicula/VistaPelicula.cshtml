@@ -1,0 +1,285 @@
+@model MovieAppWeb.Models.Pelicula
+@{
+    ViewData["Title"] = "Detalle de la pelicula";
+}
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<!--
+<style>
+.iframe-16-9 {
+   position: relative;
+   padding-bottom: 56.25%;
+   padding-top: 35px;
+   height: 0;
+   overflow: hidden;
+}
+.iframe-16-9  iframe {
+   position: absolute;
+   top:0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+}
+</style>
+-->
+
+<style>
+    a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    h2 {
+        background-color: gray;
+        color: white;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .font20 {
+        font-size: 20px;
+        font-weight: 300;
+    }
+
+    .justificado {
+        text-align: justify;
+        text- justify: auto;
+    }
+
+    .checked {
+        color: orange;
+    }
+</style>
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-5">
+            <div>
+                <img width="100%" height="auto" src="@Html.DisplayFor(model => model.Imagen)" alt="Imagen de portada">
+            </div>
+            <br>
+            <div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <button class="btn btn-warning">
+                        <a asp-controller="Reseña" asp-action="Resena" asp-route-peli="@Model.ID"> Escribir Reseña</a>
+                    </button>
+                }
+                @* <button class="btn btn-warning">
+                <a asp-controller="Reseña" asp-action="Resena" asp-route-peli="@Model.ID"> Escribir Reseña</a>
+                </button> *@
+            </div>
+        </div>
+        <div class="col-7">
+            <dl>
+                <dt>
+                    <h2>
+                        Información
+                    </h2>
+                </dt>
+                <br>
+                <dt class="font20">
+                    @Html.DisplayNameFor(model => model.Titulo) :
+                    @Html.DisplayFor(model => model.Titulo)
+                </dt>
+
+                <dt class="font20">
+                    @Html.DisplayNameFor(model => model.Director) :
+                    @Html.DisplayFor(model => model.Director)
+                </dt>
+
+                <dt class="font20">
+                    @Html.DisplayNameFor(model => model.Pais) :
+                    @Html.DisplayFor(model => model.Pais)
+                </dt>
+
+                <dt class="font20">
+                    @Html.DisplayNameFor(model => model.Año) :
+                    @Html.DisplayFor(model => model.Año)
+                </dt>
+
+                <dt class="font20">
+                    @Html.DisplayNameFor(model => model.Genero) :
+                    @Html.DisplayFor(model => model.Genero)
+                </dt>
+
+                <dt class="font20">
+                    @Html.DisplayNameFor(model => model.Duracion) :
+                    @Html.DisplayFor(model => model.Duracion)
+                </dt>
+
+                <dt class="font20">
+                    @Html.DisplayNameFor(model => model.Clasificacion) :
+                    @Html.DisplayFor(model => model.Clasificacion)
+                </dt>
+                <dt class="font20">
+                    @Html.DisplayNameFor(model => model.Idioma) :
+                    @Html.DisplayFor(model => model.Idioma)
+                </dt>
+            </dl>
+            <button type="button" class="btn btn-success">
+                <a asp-action="Catalogo"> Regresar al catalogo</a>
+            </button>
+        </div>
+    </div>
+    <br>
+    <div class="col-12">
+        <dt>
+            <h2>@Html.DisplayNameFor(model => model.Sinopsis)</h2>
+            <div class="justificado">
+                @Html.DisplayFor(model => model.Sinopsis)
+            </div>
+        </dt>
+    </div>
+
+    <br>
+
+    <h2>@Html.DisplayNameFor(model => model.Trailer)</h2>
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="@Html.DisplayFor(model => model.Trailer)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <h2 class="mt-3">
+        Reseñas de los usuarios @if (@ViewBag.resenas)
+        {
+            <a asp-action="VerResenas" asp-controller="Reseña" asp-route-peli="@Model.ID" class="btn btn-warning">Ver todas las reseñas</a>
+        }
+    </h2>
+    @if (@ViewBag.resenas)
+    {
+        @* <div class="text-center">
+    <label for="">&#9734; &#9734; &#9734; &#9734; &#9734; <small>@ViewBag.estrellitas/5</small></label>
+    <label for=""> - @ViewBag.nombreusuario</label>
+    <br>
+    <small><label for="">Publicado: @ViewBag.fecha</label></small>
+    <div class="">
+    @ViewBag.resenausuario
+    </div>
+    </div> *@
+        <div class="container">
+            <div class="row" style="background-color: teal;">
+                <div class="col-8">
+                    Comentario
+                    <small style="margin-left: 15px;">
+                        @ViewBag.fecha
+                    </small>
+                </div>
+                <div class="col-4 text-right">
+                    <label>
+                        @for (int i = 0; i < ViewBag.estrellitas; i++)
+                        {
+                            <span class="fa fa-star checked"></span>
+                        }
+                        @for (int i = 0; i < 5 - ViewBag.estrellitas; i++)
+                        {
+                            <span class="fa fa-star"></span>
+                        }
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" style="padding-left: 10%; padding-right: 10%; padding-top: 0.5rem; text-align: justify; text-justify: auto;">
+                    <i>
+                        "@ViewBag.resenausuario"
+                    </i>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                </div>
+                <div class="col-4 text-right mb-3">
+                    <small>
+                        <b>
+                            ~@ViewBag.nombreusuario~
+                        </b>
+                    </small>
+                </div>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        <p>
+            Aun no se han agregado reseñas, puedes agregar una
+            @if (User.Identity.IsAuthenticated)
+            {
+                <button class="btn btn-warning">
+                    <a asp-controller="Reseña" asp-action="Resena" asp-route-peli="@Model.ID"> Aqui</a>
+                </button>
+            }
+            else
+            {
+                <button class="btn btn-warning">
+                    <a asp-action="Registro" asp-controller="Usuario"> Registrandote aqui</a>
+                </button>
+            }
+        </p>
+
+    }
+    <div class="text-center">
+        <button type="button" class="btn btn-success mt-2">
+            <a asp-action="Catalogo"> Regresar al catalogo</a>
+        </button>
+    </div>
+
+
+    <!--
+      <dl class="dl-horizontal">
+          <dt>
+    @Html.DisplayNameFor(model => model.Imagen):
+          </dt>
+          <dt>
+             <img src="@Html.DisplayFor(model => model.Imagen)" width="35%" alt="Imagen de portada">
+          </dt>
+          <dt>
+    @Html.DisplayNameFor(model => model.Titulo) :
+    @Html.DisplayFor(model => model.Titulo)
+          </dt>
+          <dt>
+    @Html.DisplayNameFor(model => model.Director) :
+    @Html.DisplayFor(model => model.Director)
+          </dt>
+          <dt>
+    @Html.DisplayNameFor(model => model.Pais) :
+    @Html.DisplayFor(model => model.Pais)
+          </dt>
+          <dt>
+    @Html.DisplayNameFor(model => model.Año) :
+    @Html.DisplayFor(model => model.Año) :
+          </dt>
+          <dt>
+    @Html.DisplayNameFor(model => model.Genero) :
+    @Html.DisplayFor(model => model.Genero)
+          </dt>
+          <dt>
+    @Html.DisplayNameFor(model => model.Duracion) :
+    @Html.DisplayFor(model => model.Duracion)
+          </dt>
+          <dt>
+    @Html.DisplayNameFor(model => model.Clasificacion) :
+    @Html.DisplayFor(model => model.Clasificacion)
+          </dt>
+          <dt>
+    @Html.DisplayNameFor(model => model.Idioma) :
+    @Html.DisplayFor(model => model.Idioma)
+          </dt>
+          <dt>
+    @Html.DisplayNameFor(model => model.Sinopsis) :
+    @Html.DisplayFor(model => model.Sinopsis)
+          </dt>
+          <dt class="iframe-16-9">
+                                             width="560" height="315"
+             <iframe src="@Html.DisplayFor(model => model.Trailer)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </dt>
+      </dl>
+    </div>
+    -->

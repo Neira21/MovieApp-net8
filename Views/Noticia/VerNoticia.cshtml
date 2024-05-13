@@ -1,0 +1,162 @@
+@model List<Noticia>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+
+    <title>Blog Template · Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/blog/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+
+
+    <style>
+        a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+            a:hover {
+                color: #ffffff;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+
+        .hola {
+            position: relative;
+            top: 30px;
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="blog.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1 style="text-align: center;">Noticias del canal</h1>
+
+
+    <!--
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <a class="page-link" asp-controller="Noticia" asp-action="VerNoticia3" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" asp-controller="Noticia" asp-action="VerNoticia">1</a></li>
+            <li class="page-item"><a class="page-link" asp-controller="Noticia" asp-action="VerNoticia2">2</a></li>
+            <li class="page-item"><a class="page-link" asp-controller="Noticia" asp-action="VerNoticia3">3</a></li>
+            <li class="page-item">
+              <a class="page-link" asp-controller="Noticia" asp-action="VerNoticia2" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+    -->
+
+
+    <div class="container">
+
+
+        @for (var i = 0; i < (Model.Count); i++)
+        {
+
+            @if (i % 2 == 0)
+            {
+                <div class="row mb-2">
+                    <div class="col-md-11">
+                        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+
+                            <div class="hola">
+                                <img src="@Html.DisplayFor(modelItem => Model[i].Imagen)" width="165" height="300">
+                            </div>
+                            <div class="col p-4 d-flex flex-column position-static">
+
+                                <strong class="d-inline-block mb-2 text-primary">@Html.DisplayFor(modelItem => Model[i].Genero)</strong>
+                                <h3 class="mb-0">@Html.DisplayFor(modelItem => Model[i].Titulo) </h3>
+                                <div class="mb-1 text-muted">@Html.DisplayFor(modelItem => Model[i].Fecha) </div>
+                                <p class="card-text mb-auto">@Html.DisplayFor(modelItem => Model[i].contenido) </p>
+                                <br>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <button class="btn btn-primary">
+                                        <a asp-action="EditarNoticia" asp-route-id="@Model[i].ID">Editar</a>
+                                    </button>
+
+                                    <button class="btn btn-danger">
+                                        <a asp-action="BorrarNoticia" asp-route-id="@Model[i].ID">Borrar </a>
+                                    </button>
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row mb-2">
+                    <div class="col-md-11">
+                        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+
+                                <strong class="d-inline-block mb-2 text-primary">@Html.DisplayFor(modelItem => Model[i].Genero)</strong>
+                                <h3 class="mb-0">@Html.DisplayFor(modelItem => Model[i].Titulo) </h3>
+                                <div class="mb-1 text-muted">@Html.DisplayFor(modelItem => Model[i].Fecha) </div>
+                                <p class="card-text mb-auto">@Html.DisplayFor(modelItem => Model[i].contenido) </p>
+                                <br>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <button class="btn btn-primary">
+                                        <a asp-action="EditarNoticia" asp-route-id="@Model[i].ID">Editar</a>
+                                    </button>
+
+                                    <button class="btn btn-danger">
+                                        <a asp-action="BorrarNoticia" asp-route-id="@Model[i].ID">Borrar </a>
+                                    </button>
+                                }
+                            </div>
+                            <div class="hola">
+                                <img src="@Html.DisplayFor(modelItem => Model[i].Imagen)" width="165" height="300">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+
+
+
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a class="page-link" asp-controller="Noticia" asp-action="AgregarNoticia" style="text-align: center;">Agregar Noticia</a>
+    }
+
+
+</body>
+
+

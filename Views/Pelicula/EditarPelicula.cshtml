@@ -1,0 +1,90 @@
+<!--
+<link rel="stylesheet" href="~/css/agregarpeli.css" />
+-->
+@model MovieAppWeb.Models.Pelicula;
+@{
+    ViewData["Title"] = "Editar película";
+}
+<h1>@ViewData["Title"]</h1>
+<div class="container">
+
+    <form method="post">
+        <input type="hidden" asp-for="ID" />
+        <div class="form-group">
+            <label asp-for="Titulo">Título</label>
+            <input asp-for="Titulo" class="form-control" placeholder="Título">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Director">Director</label>
+            <input asp-for="Director" class="form-control" placeholder="Director(es)">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Pais">País</label>
+            <input asp-for="Pais" class="form-control" placeholder="País">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Año">Año</label>
+            <input asp-for="Año" class="form-control" placeholder="Año de estreno">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Genero">Seleccione Género</label>
+            <select asp-for="Genero" class="form-control">
+                <option>Acción</option>
+                <option>Comedia</option>
+                <option>Drama</option>
+                <option>Romance</option>
+                <option>Ciencia y ficción</option>
+                <option>Terror</option>
+                <option>Suspenso</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Duracion">Duración</label>
+            <input asp-for="Duracion" class="form-control" placeholder="En Minutos">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Clasificacion">Clasificación</label>
+            <input asp-for="Clasificacion" class="form-control">
+        </div>
+
+
+
+        <div class="form-group">
+            <label asp-for="Idioma">Idioma</label>
+            <select asp-for="Idioma" class="form-control">
+                <option>Inglés</option>
+                <option>Español</option>
+                <option>Español latino</option>
+                <option>Chino</option>
+                <option>Coreano</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Sinopsis">Sinopsis</label>
+            <textarea asp-for="Sinopsis" placeholder="Sinopsis de la pelicula" class="form-control" cols="30" rows="10"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Imagen">Url de la imagen</label>
+            <input asp-for="Imagen" class="form-control">
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="Trailer">Url del trailer</label>
+            <input asp-for="Trailer" class="form-control" required>
+        </div>
+
+
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary" value="Confirmar edicion">
+    </form>
+
+</div>

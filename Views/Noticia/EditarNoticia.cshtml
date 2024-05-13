@@ -1,0 +1,47 @@
+@model MovieAppWeb.Models.Noticia;
+@{
+    ViewData["Title"] = "Editar noticia";
+}
+<h1>@ViewData["Title"]</h1>
+<div class="container">
+
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Titulo">Título</label>
+            <input asp-for="Titulo" class="form-control" placeholder="Título">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Genero">Seleccione Género</label>
+            <select asp-for="Genero" class="form-control">
+                <option>Acción</option>
+                <option>Comedia</option>
+                <option>Drama</option>
+                <option>Romance</option>
+                <option>Ciencia y ficción</option>
+                <option>Terror</option>
+                <option>Suspenso</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Fecha">Fecha</label>
+            <input asp-for="Fecha" class="form-control" placeholder="Fecha">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="contenido">Contenido</label>
+            <input asp-for="contenido" class="form-control" placeholder="Contenido">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Imagen">Url de la imagen</label>
+            <input asp-for="Imagen" class="form-control">
+        </div>
+
+
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary" value="Editar noticia">
+    </form>
+
+</div>

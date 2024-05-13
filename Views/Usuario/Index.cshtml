@@ -1,0 +1,112 @@
+@model IEnumerable<MovieAppWeb.Models.Pelicula>
+@{
+    ViewBag.title = "Index Usuario";
+}
+<h1>@ViewBag.title</h1>
+<h5>Hola!</h5>
+<div>
+    <label>Mi Catalogo:</label> <input class="btn btn-warning" type="button" value="Filtros">
+</div>
+<form>
+    <input style="width: 90%;" type="text" placeholder="Buscar Pelicula"><input type="button" style="width: 10%;" value="&#9731">
+</form>
+<table class="table table-dark table-hover table-responsive">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">
+                Portada
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">
+                    Imagen
+                    <button>
+                        <a asp-action="VistaPelicula" asp-route-id="@item.ID">Ver Reseñas</a>
+                    </button>
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-4">
+        <div class="row">
+            <div class="col"><label>Ordenar:</label></div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label><input type="radio" name="1"> &#9759</label>
+            </div>
+            <div class="col">
+                <label><input type="radio" name="1"> &#9757</label>
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <label class="col-8">Tamaño</label>
+                    <label class="col-4"><input type="radio" name="filtro" value="Tamaño"></label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <label class="col-8">Pais</label>
+                    <label class="col-4"><input type="radio" name="filtro" value="Pais"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <label class="col-8">Genero</label>
+                    <label class="col-4"><input type="radio" name="filtro" value="Genero"></label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <label class="col-8">Duracion</label>
+                    <label class="col-4"><input type="radio" name="filtro" value="Duracion"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <label class="col-8">Nombre</label>
+                    <label class="col-4"><input type="radio" name="filtro" value="Nombre"></label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <label class="col-8">Año</label>
+                    <label class="col-4"><input type="radio" name="filtro" value="Año"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-center">
+    <input class="btn btn-primary" type="submit" value="Aplicar">
+</div>
+
+
+<div class="container">
+    <div class="text-center">
+        <input class="btn btn-success" type="submit" value="Agregar Pelicula">
+        <input class="btn btn-danger" type="submit" value="Quitar de mi catalogo">
+    </div>
+</div>

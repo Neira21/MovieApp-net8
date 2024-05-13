@@ -1,0 +1,78 @@
+@model List<Pelicula>
+
+<h2>Mis Películas - @User.Identity.Name</h2>
+
+
+<style>
+    a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    /*
+    img:hover{
+        width: 220px;
+        height: 290px;
+    }
+    */
+    img {
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.40);
+    }
+</style>
+
+
+<form method="POST">
+    <label>Filtrar por :</label>
+    <select name="idfiltro">
+        <option value="titulo">Título</option>
+        <option value="director">director</option>
+        <option value="genero">Género</option>``
+    </select>
+    <input type="text" name="filtro" required>
+    <button class="btn btn-info">Filtrar</button>
+</form>
+
+<div class="table-responsive">
+    <table class="table">
+        @for (var i = 0; i < (Model.Count); i += 2)
+        {
+            <tr>
+                @for (var j = 0; j < 2; j++)
+                {
+                    @if (i + j < Model.Count)
+                    {
+                        <td scope="col">
+                            <a asp-action="VistaPelicula" asp-route-id="@Model[i+j].ID">
+                                <img width="180px" height="250px" src="@Html.DisplayFor(modelItem => Model[i+j].Imagen)">
+                            </a>
+                            <br>
+                            <b>Titulo</b>
+                            @Html.DisplayFor(modelItem => Model[i + j].Titulo)
+                            <br>
+                            <b>Género</b>
+                            @Html.DisplayFor(modelItem => Model[i + j].Genero)
+                            <br>
+                            <button class="btn btn-primary">
+                                <a asp-action="EditarPelicula" asp-route-id="@Model[i+j].ID">Editar</a>
+                            </button>
+                            <button class="btn btn-danger">
+                                <a asp-action="BorrarPelicula" asp-route-id="@Model[i+j].ID">Borrar </a>
+                            </button>
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    </table>
+</div>
+
+
+
+
+<button type="button" class="btn btn-success"><a asp-action="AgregarPelicula"> Registrar Nueva Película</a></button>
