@@ -43,8 +43,8 @@ img{
     <button class="btn btn-info">Filtrar</button>
 </form>
 
-<div class="table-responsive">
-    <table class="table">
+@* <div class="bg-primary">
+    <table class="grid table table-bordered table-striped table-hover table-responsive-md table-responsive-sm table-responsive-lg table-responsive-xl" style="width: 100%">
         @for(var i=0;i<(Model.Count); i+=2)
         {
             <tr>
@@ -53,7 +53,8 @@ img{
                         <td scope="col">
                             <div class="portafolio-container"> 
                                 <a asp-action="VistaPelicula" asp-route-id="@Model[i+j].ID">     
-                                    <img class="portafolio-img" width="180px" height="250px" src="@Html.DisplayFor(modelItem => Model[i+j].Imagen)" >
+                                    
+                                    <img class="portafolio-img" width="180px" height="250px" src="@Url.Content("~/images/" + Model[i + j].Imagen)" />
                                 </a>
                                 <p>Click para ver detalles</p>
                             </div>
@@ -80,6 +81,40 @@ img{
             </tr>    
         }
     </table>
+</div> *@
+
+
+
+<div class="d-flex flex-wrap gap-4 ">
+    
+        @foreach (var item in Model)
+            {
+                <div scope="d-flex flex-col">
+                    <div class="portafolio
+                    -container">
+                        <a asp-action="VistaPelicula" asp-route-id="@item.ID">
+                            <img class="portafolio-img" width="180px" height="250px" src="@Url.Content("~/images/" + item.Imagen)" />
+                        </a>
+                        <p>Click para ver detalles</p>
+                    </div>
+                    <b>Titulo</b>
+                    <br>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                    <br>
+                    <b>Género</b>
+                    <br>
+                    @Html.DisplayFor(modelItem => item.Genero)
+                    <br>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="text-center">
+                            <button class="btn btn-primary">
+                                <a asp-action="EditarPelicula" asp-route-id="@item.ID">Editar</a>
+                            </button>
+                        </div>
+                    }
+                </div>
+            }
 </div>
 
 

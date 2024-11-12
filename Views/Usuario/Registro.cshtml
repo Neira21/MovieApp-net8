@@ -27,35 +27,10 @@
             <label>Apellidos:</label>
             <input class="form-control" asp-for="Apellido" placeholder="Apellidos">
         </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-2 col-sm-2 col-md-2"><label>Sexo:</label></div>
-                <div class="col-5 col-sm-5 col-md-5"><label><input type="radio" asp-for="Sexo" value="M"> Masculino</label></div>
-                <div class="col-5 col-sm-5 col-md-5"><label><input type="radio" asp-for="Sexo" value="F"> Femenino</label></div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Fecha de Nacimiento:</label>
-            <input class="form-control" asp-for="FecNac" placeholder="Fecha de Nacimiento">
-        </div>
+        
         <div class="form-group">
             <label>Correo:</label>
             <input class="form-control" asp-for="Email" placeholder="Correo Electronico">
-        </div>
-        <div class="form-group">
-            <label>Nro Celular:</label>
-            <input class="form-control" asp-for="Celular" placeholder="Numero Celular">
-        </div>
-        <div class="form-group">
-            <label>Genero Favorito:</label>
-            <select asp-for="GenFav" class="form-control">
-                <option>Acción</option>
-                <option>Comedia</option>
-                <option>Romance</option>
-                <option>Ciencia y ficción</option>
-                <option>Terror</option>
-                <option>Suspenso</option>
-            </select>
         </div>
         <div class="text-center">
             <input type="submit" class="btn btn-primary" value="Registrarme">

@@ -9,6 +9,8 @@ public class Usuario
 {
     public int Id { get; set; }
     public string Username { get; set; }
+
+    [Required(ErrorMessage = "Por favor, ingrese una contraseña")]
     public string Pwd { get; set; }
     [Required(ErrorMessage = "Por favor, ingrese el número de documento")]
     [Display(Name = "Número de documento")]
@@ -21,19 +23,9 @@ public class Usuario
     [Required(ErrorMessage = "Por favor, ingrese el apellido")]
     [StringLength(50, MinimumLength = 2)]
     public string Apellido { get; set; }
-    [Required(ErrorMessage = "Seleccione uno")]
-    public char Sexo { get; set; }
+    
     [Required(ErrorMessage = "Ingrese un email")]
     public string Email { get; set; }
-    [Required(ErrorMessage = "Ingrese un celular de contacto")]
-    [DataType(DataType.PhoneNumber)]
-    [RegularExpression(@"^([9]{1}[0-9]{8})$", ErrorMessage = "Ingresa un numero celular valido")]
-    public string Celular { get; set; }
-    [Required(ErrorMessage = "Seleccione uno")]
-    public string GenFav { get; set; }
-    [Required(ErrorMessage = "Debe ingresar una fecha")]
-    [DataType(DataType.Date)]
-    public DateTime? FecNac { get; set; }
 
     [ValidateNever]
     public List<Pelicula> Peliculas { get; set; }

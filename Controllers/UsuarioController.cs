@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -32,6 +33,13 @@ namespace MovieAppWeb.Controllers;
         [HttpPost]
         public IActionResult Registro(string username, string pwd, Usuario infouser)
         {
+            /*console*/
+
+            Console.WriteLine("Username: "+ username);
+            Console.WriteLine("pwd: "+ pwd);
+            Console.WriteLine("infouser: "+ infouser);
+
+            
             infouser.Username = username;
             infouser.Pwd = pwd;
             if(ModelState.IsValid){
@@ -61,6 +69,10 @@ namespace MovieAppWeb.Controllers;
         [HttpPost]
         public IActionResult Login(string username, string pwd)
         {
+            //alvaro1
+            //Servidores5$
+            Console.WriteLine("Username: "+ username);
+            Console.WriteLine("pwd: "+ pwd);
             var result = _sim.PasswordSignInAsync(username,pwd,false,false).Result;
             if(result.Succeeded)
             {

@@ -92,16 +92,6 @@
                 </dt>
 
                 <dt class="font20">
-                    @Html.DisplayNameFor(model => model.Director) :
-                    @Html.DisplayFor(model => model.Director)
-                </dt>
-
-                <dt class="font20">
-                    @Html.DisplayNameFor(model => model.Pais) :
-                    @Html.DisplayFor(model => model.Pais)
-                </dt>
-
-                <dt class="font20">
                     @Html.DisplayNameFor(model => model.Año) :
                     @Html.DisplayFor(model => model.Año)
                 </dt>
@@ -111,19 +101,6 @@
                     @Html.DisplayFor(model => model.Genero)
                 </dt>
 
-                <dt class="font20">
-                    @Html.DisplayNameFor(model => model.Duracion) :
-                    @Html.DisplayFor(model => model.Duracion)
-                </dt>
-
-                <dt class="font20">
-                    @Html.DisplayNameFor(model => model.Clasificacion) :
-                    @Html.DisplayFor(model => model.Clasificacion)
-                </dt>
-                <dt class="font20">
-                    @Html.DisplayNameFor(model => model.Idioma) :
-                    @Html.DisplayFor(model => model.Idioma)
-                </dt>
             </dl>
             <button type="button" class="btn btn-success">
                 <a asp-action="Catalogo"> Regresar al catalogo</a>
@@ -238,19 +215,8 @@
     @Html.DisplayNameFor(model => model.Imagen):
           </dt>
           <dt>
-             <img src="@Html.DisplayFor(model => model.Imagen)" width="35%" alt="Imagen de portada">
-          </dt>
-          <dt>
     @Html.DisplayNameFor(model => model.Titulo) :
     @Html.DisplayFor(model => model.Titulo)
-          </dt>
-          <dt>
-    @Html.DisplayNameFor(model => model.Director) :
-    @Html.DisplayFor(model => model.Director)
-          </dt>
-          <dt>
-    @Html.DisplayNameFor(model => model.Pais) :
-    @Html.DisplayFor(model => model.Pais)
           </dt>
           <dt>
     @Html.DisplayNameFor(model => model.Año) :
@@ -259,18 +225,6 @@
           <dt>
     @Html.DisplayNameFor(model => model.Genero) :
     @Html.DisplayFor(model => model.Genero)
-          </dt>
-          <dt>
-    @Html.DisplayNameFor(model => model.Duracion) :
-    @Html.DisplayFor(model => model.Duracion)
-          </dt>
-          <dt>
-    @Html.DisplayNameFor(model => model.Clasificacion) :
-    @Html.DisplayFor(model => model.Clasificacion)
-          </dt>
-          <dt>
-    @Html.DisplayNameFor(model => model.Idioma) :
-    @Html.DisplayFor(model => model.Idioma)
           </dt>
           <dt>
     @Html.DisplayNameFor(model => model.Sinopsis) :
