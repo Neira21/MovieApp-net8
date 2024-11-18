@@ -125,10 +125,32 @@ public IActionResult AgregarPelicula(PeliculaDTO peliculaDTO)
 
   public IActionResult BorrarPelicula(int? id)
   {
+    if (id == null)
+    {
+        return NotFound();
+    }
+
+    // Busca la película en la base de datos
     var pelicula = _context.Peliculas.Find(id);
+    if (pelicula == null)
+    {
+        return NotFound();
+    }
+
+    // Obtén la ruta completa de la imagen
+    var imagePath = Path.Combine(_environment.WebRootPath, "images", pelicula.Imagen);
+    
+    // Verifica si el archivo existe y elimínalo
+    if (System.IO.File.Exists(imagePath))
+    {
+        System.IO.File.Delete(imagePath);
+    }
+
+    // Elimina la película de la base de datos
     _context.Peliculas.Remove(pelicula);
     _context.SaveChanges();
-    return RedirectToAction(nameof(Catalogo));
+
+    return RedirectToAction("MisPeliculas");
   }
   public IActionResult Catalogo()
   {

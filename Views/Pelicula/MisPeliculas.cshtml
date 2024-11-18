@@ -38,39 +38,44 @@
     <button class="btn btn-info">Filtrar</button>
 </form>
 
-<div class="table-responsive">
-    <table class="table">
-        @for (var i = 0; i < (Model.Count); i += 2)
+<div class="d-flex flex-wrap gap-4 ">
+    
+        @foreach (var item in Model)
         {
-            <tr>
-                @for (var j = 0; j < 2; j++)
-                {
-                    @if (i + j < Model.Count)
+                <div scope="d-flex flex-col">
+                    <div class="portafolio
+                    -container">
+                        <a asp-action="VistaPelicula" asp-route-id="@item.ID">
+                            <img class="portafolio-img" width="180px" height="250px" src="@Url.Content("~/images/" + item.Imagen)" />
+                        </a>
+                        <p>Click para ver detalles</p>
+                    </div>
+                    <b>Titulo</b>
+                    <br>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                    <br>
+                    <b>Género</b>
+                    <br>
+                    @Html.DisplayFor(modelItem => item.Genero)
+                    <br>
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        <td scope="col">
-                            <a asp-action="VistaPelicula" asp-route-id="@Model[i+j].ID">
-                                <img width="180px" height="250px" src="@Html.DisplayFor(modelItem => Model[i+j].Imagen)">
-                            </a>
-                            <br>
-                            <b>Titulo</b>
-                            @Html.DisplayFor(modelItem => Model[i + j].Titulo)
-                            <br>
-                            <b>Género</b>
-                            @Html.DisplayFor(modelItem => Model[i + j].Genero)
-                            <br>
+                        <div class="text-center">
                             <button class="btn btn-primary">
-                                <a asp-action="EditarPelicula" asp-route-id="@Model[i+j].ID">Editar</a>
+                                <a asp-action="EditarPelicula" asp-route-id="@item.ID">Editar</a>
                             </button>
                             <button class="btn btn-danger">
-                                <a asp-action="BorrarPelicula" asp-route-id="@Model[i+j].ID">Borrar </a>
+                                <a asp-action="BorrarPelicula" asp-route-id="@item.ID">Eliminar</a>
                             </button>
-                        </td>
+                        </div>
                     }
-                }
-            </tr>
-        }
-    </table>
+                </div>
+            }
+        
 </div>
+                            
+                        
+          
 
 
 
