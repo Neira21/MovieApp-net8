@@ -38,52 +38,52 @@ public class PeliculaController : Controller
     return View();
   }
   [HttpPost]
-public IActionResult AgregarPelicula(PeliculaDTO peliculaDTO)
-{
+  public IActionResult AgregarPelicula(PeliculaDTO peliculaDTO)
+  {
     if (peliculaDTO.ImagenFile == null)
     {
-        ModelState.AddModelError("ImagenFile", "Debe seleccionar una imagen");
+      ModelState.AddModelError("ImagenFile", "Debe seleccionar una imagen");
     }
 
     if (!ModelState.IsValid)
     {
-        Console.WriteLine("Error en la validación");
-        return View(peliculaDTO);
+      Console.WriteLine("Error en la validación");
+      return View(peliculaDTO);
     }
     else
     {
-        // Formato de nombre de archivo amigable
-        string newFileName = Guid.NewGuid().ToString() + Path.GetExtension(peliculaDTO.ImagenFile!.FileName);
-        string imageFullPath = Path.Combine(_environment.WebRootPath, "images", newFileName);
+      // Formato de nombre de archivo amigable
+      string newFileName = Guid.NewGuid().ToString() + Path.GetExtension(peliculaDTO.ImagenFile!.FileName);
+      string imageFullPath = Path.Combine(_environment.WebRootPath, "images", newFileName);
 
-        using (var stream = System.IO.File.Create(imageFullPath))
-        {
-            peliculaDTO.ImagenFile.CopyTo(stream);
-        }
+      using (var stream = System.IO.File.Create(imageFullPath))
+      {
+        peliculaDTO.ImagenFile.CopyTo(stream);
+      }
 
-        var usuarioId = _context.Usuarios
-            .Where(p => p.Username.Equals(User.Identity.Name))
-            .Select(p => p.Id)
-            .FirstOrDefault();
+      var usuarioId = _context.Usuarios
+          .Where(p => p.Username.Equals(User.Identity.Name))
+          .Select(p => p.Id)
+          .FirstOrDefault();
 
-        var objPelicula = new Pelicula
-        {
-            Titulo = peliculaDTO.Titulo,
-            Año = peliculaDTO.Año,
-            Genero = peliculaDTO.Genero,
-            Sinopsis = peliculaDTO.Sinopsis,
-            Imagen = newFileName,
-            Trailer = peliculaDTO.Trailer,
-            UsuarioId = usuarioId
-        };
+      var objPelicula = new Pelicula
+      {
+        Titulo = peliculaDTO.Titulo,
+        Año = peliculaDTO.Año,
+        Genero = peliculaDTO.Genero,
+        Sinopsis = peliculaDTO.Sinopsis,
+        Imagen = newFileName,
+        Trailer = peliculaDTO.Trailer,
+        UsuarioId = usuarioId
+      };
 
-        _context.Peliculas.Add(objPelicula);
-        _context.SaveChanges();
-        Console.WriteLine("Exito en la validación");
+      _context.Peliculas.Add(objPelicula);
+      _context.SaveChanges();
+      Console.WriteLine("Exito en la validación");
 
-        return RedirectToAction("Catalogo", "Pelicula");
+      return RedirectToAction("Catalogo", "Pelicula");
     }
-}
+  }
 
   public string ConvertirPelicula(string urlpelicula)
   {
@@ -127,23 +127,23 @@ public IActionResult AgregarPelicula(PeliculaDTO peliculaDTO)
   {
     if (id == null)
     {
-        return NotFound();
+      return NotFound();
     }
 
     // Busca la película en la base de datos
     var pelicula = _context.Peliculas.Find(id);
     if (pelicula == null)
     {
-        return NotFound();
+      return NotFound();
     }
 
     // Obtén la ruta completa de la imagen
     var imagePath = Path.Combine(_environment.WebRootPath, "images", pelicula.Imagen);
-    
+
     // Verifica si el archivo existe y elimínalo
     if (System.IO.File.Exists(imagePath))
     {
-        System.IO.File.Delete(imagePath);
+      System.IO.File.Delete(imagePath);
     }
 
     // Elimina la película de la base de datos
@@ -224,18 +224,29 @@ public IActionResult AgregarPelicula(PeliculaDTO peliculaDTO)
   //     }
   //     return View(pelicula);
   // }
+
   [HttpPost]
-  public IActionResult Catalogo(string idfiltro, string filtro)
+  public IActionResult Catalogo(string idfiltro, string filtro, string action)
   {
+    Console.WriteLine("IdFiltro: " + idfiltro);
+    Console.WriteLine("Filtro: " + filtro);
+    Console.WriteLine("Action: " + action);
+
     var listClientes = _context.Peliculas.OrderBy(s => s.ID).ToList();
-    if (idfiltro == "titulo")
+
+    if (action == "filter")
     {
-      listClientes = _context.Peliculas.Where(c => c.Titulo.ToUpper().Contains(filtro.ToUpper())).OrderBy(s => s.ID).ToList();
+      if (idfiltro == "titulo")
+      {
+        listClientes = _context.Peliculas.Where(c => c.Titulo.ToUpper().Contains(filtro.ToUpper())).OrderBy(s => s.ID).ToList();
+      }
+      else
+      {
+        listClientes = _context.Peliculas.Where(c => c.Genero.ToUpper().Contains(filtro.ToUpper())).OrderBy(s => s.ID).ToList();
+      }
     }
-    else
-    {
-      listClientes = _context.Peliculas.Where(c => c.Genero.ToUpper().Contains(filtro.ToUpper())).OrderBy(s => s.ID).ToList();
-    }
+
+
     // var listClientes=_context.Clientes.Where(c => c.Nombre.ToUpper().Contains(filtro.ToUpper())).OrderBy(s=>s.Id) .ToList();
     return View(listClientes);
   }
@@ -245,15 +256,24 @@ public IActionResult AgregarPelicula(PeliculaDTO peliculaDTO)
     return View(listapeliculas);
   }
   [HttpPost]
-  public IActionResult MisPeliculas(string idfiltro, string filtro)
+  public IActionResult MisPeliculas(string idfiltro, string filtro, string action)
   {
+    Console.WriteLine("IdFiltro: " + idfiltro);
+    Console.WriteLine("Filtro: " + filtro);
+    Console.WriteLine("Action: " + action);
+    
     var listapeliculas = _context.Peliculas.OrderBy(x => x.ID).Where(p => p.Usuario.Username.Equals(User.Identity.Name)).ToList();
-    if (idfiltro == "titulo")
+
+
+    if (action == "filter")
     {
-      listapeliculas = _context.Peliculas.Where(c => c.Titulo.ToUpper().Contains(filtro.ToUpper())).OrderBy(s => s.ID).ToList();
-    }
-    {
-      listapeliculas = _context.Peliculas.Where(c => c.Genero.ToUpper().Contains(filtro.ToUpper())).OrderBy(s => s.ID).ToList();
+      if (idfiltro == "titulo")
+      {
+        listapeliculas = _context.Peliculas.Where(c => c.Titulo.ToUpper().Contains(filtro.ToUpper())).OrderBy(s => s.ID).ToList();
+      }
+      {
+        listapeliculas = _context.Peliculas.Where(c => c.Genero.ToUpper().Contains(filtro.ToUpper())).OrderBy(s => s.ID).ToList();
+      }
     }
     return View(listapeliculas);
   }
