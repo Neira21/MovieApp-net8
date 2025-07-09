@@ -63,7 +63,8 @@
     <div class="row">
         <div class="col-5">
             <div>
-                <img width="100%" height="auto" src="@Html.DisplayFor(model => model.Imagen)" alt="Imagen de portada">
+                <img src="~/images/@Url.Content(Model.Imagen)" alt="Imagen de portada" width="100%" />
+
             </div>
             <br>
             <div>

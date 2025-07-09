@@ -52,6 +52,12 @@
   letter-spacing: -.05rem;
 }
 
+.carousel-1 img{
+  object-fit: cover;
+  height: 500px;
+
+}
+
 /* rtl:end:remove */
 
 /* RESPONSIVE CSS

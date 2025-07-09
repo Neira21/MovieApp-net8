@@ -1,5 +1,76 @@
 ﻿@{
-    ViewData["Title"] = "Proyecto hecho en .Net para gestión de películas y comentarios";
+    ViewData["Title"] = "Gestión de Películas 🎬";
 }
-<h1>@ViewData["Title"]</h1>
-<p> Puede loguearte, registrar y gestionar películas, dejar comentarios y calificaciones, además de visualizar los comentarios y calificaciones de otros usuarios</p>
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+        <p class="lead">Proyecto hecho en .NET 8 que permite a los usuarios gestionar películas, comentarios y calificaciones.</p>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title">🚀 Funcionalidades Principales</h2>
+            <ul class="list-group list-group-flush mt-3">
+                <li class="list-group-item">👤 Registro e inicio de sesión de usuarios</li>
+                <li class="list-group-item">🎬 Gestión completa de películas (crear, editar, eliminar)</li>
+                <li class="list-group-item">📝 Dejar comentarios y calificaciones</li>
+                <li class="list-group-item">👁️ Visualizar comentarios y calificaciones de otros usuarios</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row gy-4">
+        <div class="col-md-4">
+            <div class="card border-info h-100">
+                <div class="card-header bg-info text-white">🔐 Inicio de Sesión</div>
+                <div class="card-body">
+                    <p>El usuario puede autenticarse y acceder a funcionalidades protegidas.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-danger h-100">
+                <div class="card-header bg-danger text-white">🎞️ Catálogo</div>
+                <div class="card-body">
+                    <p>Visualiza todas las películas disponibles y sus detalles.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-warning h-100">
+                <div class="card-header bg-warning text-dark">💬 Comentarios</div>
+                <div class="card-body">
+                    <p>Deja tu opinión sobre las películas y revisa la de otros usuarios.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row gy-4 mt-3">
+        <div class="col-md-4">
+            <div class="card border-secondary h-100">
+                <div class="card-header bg-secondary text-white">👥 Usuario Logueado</div>
+                <div class="card-body">
+                    <p>Puede gestionar su catálogo de películas: agregar, editar o eliminar.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-success h-100">
+                <div class="card-header bg-success text-white">⭐ Calificación</div>
+                <div class="card-body">
+                    <p>Los usuarios logueados pueden calificar películas de otros usuarios.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-dark h-100">
+                <div class="card-header bg-dark text-white">👤 Usuario Invitado</div>
+                <div class="card-body">
+                    <p>Puede visualizar películas y sus detalles, pero no gestionarlas ni comentar.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

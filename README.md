@@ -18,3 +18,29 @@
 - Diseños Responsives
 - Entity Framework
 - SQL Server
+
+#	🎥 Diseños y capturas de pantalla
+- Home
+<img src="./design/Home.png" alt="Imagen de la pelicula" style="object-fit: contain; width: 100%; height: 100%;">
+
+- Login
+<img src="./design/Login.png" alt="Imagen de la pelicula" style="object-fit: contain; width: 100%; height: 100%;">
+
+
+- Detalle del proyecto
+<img src="./design/DetailProject.png" alt="Imagen de la pelicula" style="object-fit: contain; width: 100%; height: 100%;">
+
+
+- Agregar pelicula
+<img src="./design/AddMovie.png" alt="Imagen de la pelicula" style="object-fit: contain; width: 100%; height: 100%;">
+
+- Detalle de pelicula
+<img src="./design/DetailMovie.png" alt="Imagen de la pelicula" style="object-fit: contain; width: 100%; height: 100%;">
+
+- Listado de peliculas
+<img src="./design/ListMovie.png" alt="Imagen de la pelicula" style="object-fit: contain; width: 100%; height: 100%;">
+
+- Registro de usuario
+<img src="./design/Register.png" alt="Imagen de la pelicula" style="object-fit: contain; width: 100%; height: 100%;">
+
+
